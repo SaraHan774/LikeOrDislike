@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/btn_like"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_thumb_up_black_24dp"
+        android:background="@android:color/transparent"
+        android:onClick="onLikeButtonClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <ImageButton
+        android:id="@+id/btn_dislike"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@id/btn_like"
+        android:src="@drawable/ic_thumb_down_black_24dp"
+        android:background="@android:color/transparent"
+        android:onClick="onDislikeButtonClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_like_count"
+        android:layout_centerInParent="true"
+        android:layout_toEndOf="@id/btn_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Like Count"/>
+
+    <TextView
+        android:id="@+id/tv_dislike_count"
+        android:layout_below="@id/btn_like"
+        android:layout_toEndOf="@id/btn_dislike"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Dislike Count"/>
+
+
+</RelativeLayout>
