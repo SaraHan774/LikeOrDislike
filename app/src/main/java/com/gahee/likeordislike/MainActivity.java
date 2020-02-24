@@ -1,16 +1,13 @@
 package com.gahee.likeordislike;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,9 +20,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton btnLike;
     private ImageButton btnDislike;
 
+    //스크린을 가로로 돌리면 int 값이 초기화 되므로 좋지 않은 방법입니다. ViewModel 과 LiveData 로
+    //관리하거나, onSavedInstanceState 함수를 오버라이딩 해서 Bundle 객체에 담아
+    //onCreate 에서 회수하여 원래의 상태를 복원해야 합니다.
     private static int likeCount = 1, dislikeCount = 1;
-
-    private static boolean isBothPressed = false;
 
     private MutableLiveData<ButtonStatus> likeButtonStatus = new MutableLiveData<>();
     private MutableLiveData<ButtonStatus> dislikeButtonStatus = new MutableLiveData<>();
@@ -73,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case UNPRESSED:
+                        //버튼이 눌리지 않은 상태가 되면 반드시 카운트가 감소한다.
                         btnLike.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_black_24dp));
-                        //if both are not pressed
                         setLikeCountText(--likeCount);
                         break;
 
@@ -92,13 +90,14 @@ public class MainActivity extends AppCompatActivity {
                         btnDislike.setImageDrawable(getDrawable(R.drawable.ic_thumb_down_yellow_24dp));
 
                         if(likeButtonStatus.getValue() == ButtonStatus.PRESSED) {
+                            //status 만 unpressed 로 바꿔주면 된다.
                             likeButtonStatus.setValue(ButtonStatus.UNPRESSED);
                         }
                         break;
 
                     case UNPRESSED:
                         btnDislike.setImageDrawable(getDrawable(R.drawable.ic_thumb_down_black_24dp));
-                        //if both are not pressed
+                        //버튼이 눌리지 않은 상태가 되면 반드시 카운트가 감소한다.
                         setDislikeCountText(--dislikeCount);
                         break;
                 }
